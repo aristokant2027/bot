@@ -1,0 +1,55 @@
+file,name,color,qty,x,y,z,volume_cm3,area_cm2,tris,printer,genus,note
+stl/1_white/head_lower.stl,head_lower,W,1,142.0,172.5,95.0,1400.2,756.7,29470,A1 / X2D,0,倒置打印(大面朝下)
+stl/1_white/head_upper.stl,head_upper,W,1,139.4,168.8,68.0,765.9,523.4,22482,A1 / X2D,0,
+stl/3_purple/head_stripe.stl,head_stripe,P,1,65.4,67.3,9.0,3.7,25.6,5750,A1 / X2D,0,"头部左侧紫色饰条, 胶粘入槽"
+stl/2_black/visor.stl,visor,K,1,139.0,86.4,26.0,50.6,177.9,19800,A1 / X2D,0,"面罩, 从上方落入头下半, 被头顶盖压住"
+stl/3_purple/eye_strip_L.stl,eye_strip_L,P,1,47.4,50.2,10.0,3.1,20.2,3906,A1 / X2D,0,"眼灯条, 嵌入面罩"
+stl/3_purple/eye_strip_R.stl,eye_strip_R,P,1,47.4,50.2,10.0,3.1,20.2,3906,A1 / X2D,0,"眼灯条, 嵌入面罩"
+stl/2_black/neck.stl,neck,K,1,62.0,62.0,47.0,109.3,206.2,18994,A1 / X2D,1,
+stl/1_white/chest.stl,chest,W,1,224.0,170.7,204.7,6387.0,2188.9,34752,A1 / X2D,0,"胸甲, 底面朝下; 胸肌下缘建议开支撑"
+stl/2_black/abdomen.stl,abdomen,K,1,160.0,116.0,80.0,1339.9,926.0,13652,A1 / X2D,2,
+stl/1_white/pelvis.stl,pelvis,W,1,273.7,158.0,157.0,4096.7,1863.6,19182,A2L,0,倒置打印(腰面朝下); 仅 A2L 可整体打印
+stl/2_black/hip_L.stl,hip_L,K,1,106.0,106.0,45.0,366.3,373.4,9174,A1 / X2D,1,
+stl/2_black/hip_R.stl,hip_R,K,1,106.0,106.0,45.0,366.3,373.4,9174,A1 / X2D,1,
+stl/1_white/thigh_L.stl,thigh_L,W,1,117.1,129.4,245.0,2198.9,1122.5,22800,A1 / X2D,0,倒置打印(髋端朝下)
+stl/1_white/thigh_R.stl,thigh_R,W,1,117.1,129.4,245.0,2198.9,1122.5,22800,A1 / X2D,0,倒置打印(髋端朝下)
+stl/2_black/knee_L.stl,knee_L,K,1,98.0,76.0,80.0,496.8,462.2,8322,A1 / X2D,1,
+stl/2_black/knee_R.stl,knee_R,K,1,98.0,76.0,80.0,496.8,462.2,8322,A1 / X2D,1,
+stl/1_white/kneecap_L.stl,kneecap_L,W,1,60.0,68.2,18.0,53.7,96.6,5368,A1 / X2D,0,
+stl/1_white/kneecap_R.stl,kneecap_R,W,1,60.0,68.2,18.0,53.7,96.6,5368,A1 / X2D,0,
+stl/1_white/shin_L.stl,shin_L,W,1,89.6,114.0,235.0,1381.5,879.8,30218,A1 / X2D,0,倒置打印(膝端朝下)
+stl/1_white/shin_R.stl,shin_R,W,1,89.6,114.0,235.0,1381.5,879.8,30218,A1 / X2D,0,倒置打印(膝端朝下)
+stl/2_black/ankle_L.stl,ankle_L,K,1,78.0,62.0,33.0,100.1,167.4,4522,A1 / X2D,1,
+stl/2_black/ankle_R.stl,ankle_R,K,1,78.0,62.0,33.0,100.1,167.4,4522,A1 / X2D,1,
+stl/1_white/foot_L.stl,foot_L,W,1,86.2,186.0,62.0,761.9,604.0,13462,A1 / X2D,1,
+stl/1_white/foot_R.stl,foot_R,W,1,86.2,186.0,62.0,761.9,604.0,13462,A1 / X2D,1,
+stl/2_black/shoulder_L.stl,shoulder_L,K,1,80.0,84.0,26.0,154.0,232.4,688,A1 / X2D,1,
+stl/2_black/shoulder_R.stl,shoulder_R,K,1,80.0,84.0,26.0,154.0,232.4,688,A1 / X2D,1,
+stl/1_white/upper_arm_L.stl,upper_arm_L,W,1,94.3,86.1,239.9,1089.3,733.2,34088,A1 / X2D,4,肘端朝下竖直打印
+stl/1_white/upper_arm_R.stl,upper_arm_R,W,1,94.3,86.1,239.9,1089.3,733.2,34088,A1 / X2D,4,肘端朝下竖直打印
+stl/2_black/elbow_L.stl,elbow_L,K,1,66.0,60.0,50.0,143.1,192.4,6762,A1 / X2D,1,
+stl/2_black/elbow_R.stl,elbow_R,K,1,66.0,60.0,50.0,143.1,192.4,6762,A1 / X2D,1,
+stl/1_white/forearm_L.stl,forearm_L,W,1,71.2,72.1,190.0,485.1,465.8,15180,A1 / X2D,4,
+stl/1_white/forearm_R.stl,forearm_R,W,1,71.2,72.1,190.0,485.1,465.8,15180,A1 / X2D,4,
+stl/3_purple/wrist_band_L.stl,wrist_band_L,P,1,47.0,47.0,18.0,26.4,67.7,1154,A1 / X2D,1,
+stl/3_purple/wrist_band_R.stl,wrist_band_R,P,1,47.0,47.0,18.0,26.4,67.7,1154,A1 / X2D,1,
+stl/1_white/hand_L.stl,hand_L,W,1,71.5,49.1,140.2,125.5,268.4,28544,A1 / X2D,2,"腕面朝下, 手指朝上; 建议树状支撑"
+stl/1_white/hand_R.stl,hand_R,W,1,71.5,49.1,140.2,125.5,268.4,28544,A1 / X2D,2,"腕面朝下, 手指朝上; 建议树状支撑"
+stl/2_black/chest_logo_text.stl,chest_logo_text,K,1,59.0,4.2,10.4,0.3,9.4,1158,A1 / X2D,-3,"可选: 与 chest.stl 同坐标, 在切片软件中作为同一对象的多色零件载入"
+stl/3_purple/chest_logo_plus.stl,chest_logo_plus,P,1,12.6,3.9,12.6,0.1,2.2,186,A1 / X2D,-3,"可选: 与 chest.stl 同坐标, 在切片软件中作为同一对象的多色零件载入"
+stl/3_purple/shoulder_pad.stl,shoulder_pad,P,2,13.0,47.0,8.8,5.1,21.1,260,A1 / X2D,0,"肩部紫色饰块, 压入/胶粘"
+stl/1_white/base_front_L.stl,base_front_L,W,1,240.0,180.0,35.0,1468.3,1154.1,260,A1 / X2D,0,"底座 1/4, 顶面朝上"
+stl/1_white/base_front_R.stl,base_front_R,W,1,240.0,180.0,35.0,1468.3,1154.1,258,A1 / X2D,0,"底座 1/4, 顶面朝上"
+stl/1_white/base_rear_L.stl,base_rear_L,W,1,240.0,180.0,35.0,1449.8,1184.3,276,A1 / X2D,0,"底座 1/4, 顶面朝上"
+stl/1_white/base_rear_R.stl,base_rear_R,W,1,240.0,180.0,35.0,1449.8,1184.3,280,A1 / X2D,0,"底座 1/4, 顶面朝上"
+stl/4_connectors/tenon_T16x100.stl,tenon_T16x100,H,2,16.0,100.0,16.0,23.9,70.1,436,A1 / X2D,2,"榫条, 平躺打印, 4 层壁 + 40% 填充"
+stl/4_connectors/tenon_T16x130.stl,tenon_T16x130,H,2,16.0,130.0,16.0,31.5,88.4,436,A1 / X2D,2,"榫条, 平躺打印, 4 层壁 + 40% 填充"
+stl/4_connectors/tenon_T24x110.stl,tenon_T24x110,H,2,24.0,110.0,24.0,60.9,120.5,436,A1 / X2D,2,"榫条, 平躺打印, 4 层壁 + 40% 填充"
+stl/4_connectors/tenon_T24x140.stl,tenon_T24x140,H,3,24.0,140.0,24.0,78.1,148.4,436,A1 / X2D,2,"榫条, 平躺打印, 4 层壁 + 40% 填充"
+stl/4_connectors/tenon_T24x160.stl,tenon_T24x160,H,2,24.0,160.0,24.0,89.6,167.1,436,A1 / X2D,2,"榫条, 平躺打印, 4 层壁 + 40% 填充"
+stl/4_connectors/tenon_T24x180.stl,tenon_T24x180,H,4,24.0,180.0,24.0,101.1,185.7,436,A1 / X2D,2,"榫条, 平躺打印, 4 层壁 + 40% 填充"
+stl/4_connectors/pin_P6x40.stl,pin_P6x40,H,8,40.0,6.0,5.2,1.1,7.8,396,A1 / X2D,0,手臂横销
+stl/4_connectors/pin_P6x80.stl,pin_P6x80,H,2,80.0,6.0,5.2,2.1,15.2,396,A1 / X2D,0,肩部横销
+stl/4_connectors/dowel_P6x20.stl,dowel_P6x20,H,7,20.0,6.0,5.2,0.5,4.1,396,A1 / X2D,0,"定位销(膝盖4, 头部3)"
+stl/4_connectors/bowtie_key.stl,bowtie_key,H,8,50.0,26.0,9.8,9.3,34.3,28,A1 / X2D,0,"底座蝴蝶键, 从底面压入"
+stl/4_connectors/fit_test_coupon.stl,fit_test_coupon,H,1,74.0,40.0,22.0,44.7,135.5,444,A1 / X2D,4,"先打这个, 试 T24/T16 榫条与 P6 销的松紧"

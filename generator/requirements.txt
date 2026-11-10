@@ -1,0 +1,5 @@
+numpy
+scikit-image
+manifold3d
+matplotlib
+pillow

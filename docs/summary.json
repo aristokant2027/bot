@@ -1,0 +1,23 @@
+{
+ "height_mm": 1300.0,
+ "base_mm": [
+  480.0,
+  360.0,
+  35.0
+ ],
+ "est_grams": {
+  "W": 6567,
+  "P": 37,
+  "K": 1053,
+  "H": 461
+ },
+ "est_total_g": 8119,
+ "centre_of_mass_mm": [
+  0.0,
+  -4.0,
+  579.9
+ ],
+ "interference": [],
+ "files": 54,
+ "pieces": 83
+}
