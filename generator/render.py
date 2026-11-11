@@ -4,7 +4,7 @@ import warnings
 import numpy as np
 from PIL import Image
 
-COL = {"S": (198, 201, 206), "W": (236, 233, 224), "K": (46, 46, 52), "H": (230, 150, 40)}
+COL = {"W": (236, 233, 224), "K": (46, 46, 52), "P": (92, 52, 214), "H": (230, 150, 40)}
 BG = (244, 244, 248)
 warnings.filterwarnings("ignore")
 

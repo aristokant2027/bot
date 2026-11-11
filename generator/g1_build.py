@@ -1,4 +1,4 @@
-"""Unitree G1 静态摆件：把 MakerWorld 的 G1Static.stl 放大到真机身高，
+"""HUMAN+ 配色的 Unitree G1 静态摆件：把 MakerWorld 的 G1Static.stl 放大到真机身高，
 分色、拆件、开榫孔、加底座和背后支撑柱，导出全部可打印 STL 与报告。
 
 usage: python3 generator/g1_build.py [--out .] [--no-render]
@@ -22,7 +22,12 @@ WALL = 4.0                 # 榫孔四周最小壁厚
 SIZES = (24, 16, 12, 8)    # 可选榫条截面
 X0 = 9.0                   # 身体左右对称面 (模型略偏)
 BEDS = [("A1 / X2D", (256, 256, 256)), ("A2L", (330, 320, 325))]
-COLOR_DIR = {"S": "1_shell_silver", "K": "2_black", "H": "3_connectors"}
+COLOR_DIR = {"W": "1_white", "K": "2_black", "P": "3_purple", "H": "4_connectors"}
+# HUMAN+ 配色 (取自效果图色卡)：白壳 / 炭黑关节 / 紫色点缀
+PALETTE = {"W": "#ECE9E0", "K": "#2E2E34", "P": "#5C34D6"}
+Z_WAISTCOL = 770.0         # 腰柱 (黑) 与骨盆 (白) 的分界
+# 胸口 logo 贴纸位：压一块平底浅槽 (盖掉原模型的 UNITREE 浮雕字)
+LOGO = dict(cx=4.0, cz=1050.0, w=112.0, h=22.0, min_depth=0.4, r=3.0)
 
 # 躯干/腿的水平切面 (z, mm)
 Z_ANKLE, Z_SHIN, Z_KNEE, Z_THIGH = 115, 300, 400, 630
@@ -243,9 +248,9 @@ def segment(whole):
         b = c.bounding_box(); s = "L" if (b[0] + b[3]) / 2 > X0 else "R"
         z = (0, 0, 1)
         S["foot_" + s] = (slab(c, z, -1, Z_ANKLE), "K", (0, 0, -1))        # 脚掌+脚踝一体 (最细处不拆)
-        S["shin_" + s] = (slab(c, z, Z_ANKLE, Z_SHIN), "S", (0, 0, 1))
+        S["shin_" + s] = (slab(c, z, Z_ANKLE, Z_SHIN), "W", (0, 0, 1))
         S["knee_" + s] = (slab(c, z, Z_SHIN, Z_KNEE), "K", (0, 0, -1))
-        S["thigh_" + s] = (slab(c, z, Z_KNEE, Z_THIGH + 1), "S", (0, 0, 1))
+        S["thigh_" + s] = (slab(c, z, Z_KNEE, Z_THIGH + 1), "W", (0, 0, 1))
     # 骨盆
     mid = slab(body, (0, 0, 1), Z_THIGH, Z_WAIST)
     hipL = biggest(far(mid, (X_HIP_L, 0, 0), (1, 0, 0)))
@@ -255,34 +260,37 @@ def segment(whole):
         b = c.bounding_box()
         if (b[0] + b[3]) / 2 > X0: hipL += c
         else: hipR += c
-    S["hip_L"] = (hipL, "S", (0, 0, -1)); S["hip_R"] = (hipR, "S", (0, 0, -1))
-    S["pelvis"] = (Manifold.batch_boolean([pel[0]] + crotch, m3.OpType.Add), "K", (-1, 0, 0))
+    S["hip_L"] = (hipL, "W", (0, 0, -1)); S["hip_R"] = (hipR, "W", (0, 0, -1))
+    pelvis = Manifold.batch_boolean([pel[0]] + crotch, m3.OpType.Add)
+    S["pelvis"] = (near(pelvis, (0, 0, Z_WAISTCOL), (0, 0, 1)), "W", (-1, 0, 0))
+    S["waistcol"] = (far(pelvis, (0, 0, Z_WAISTCOL), (0, 0, 1)), "K", (0, 0, -1))
     # 躯干 / 颈 / 头
-    S["torso"] = (slab(body, (0, 0, 1), Z_WAIST, Z_NECK0), "S", (0, 0, -1))
+    torso, logo_info = logo_pad(slab(body, (0, 0, 1), Z_WAIST, Z_NECK0))
+    S["torso"] = (torso, "W", (0, 0, -1))
     S["neck"] = (slab(body, (0, 0, 1), Z_NECK0, Z_NECK1), "K", (0, 0, -1))
     head = far(body, (0, 0, Z_NECK1), (0, 0, 1))
-    S["head"] = (head, "S", (0, 0, -1))
+    S["head"] = (head, "W", (0, 0, -1))
     for i, vz in enumerate(make_visor(head)):
-        S[f"visor_{i + 1}"] = (vz, "K", (0, 1, 0))
+        S[f"visor_{i + 1}"] = (vz, "K" if i == 0 else "P", (0, 1, 0))     # 上方细条做紫色灯带
 
     # 左臂：手 <- 腕 <- 前臂 <- 环 <- 肘 | 袖 | 肩
     r = armL
-    S["hand_L"] = (far(r, CL + DL * TL["wrist1"], DL), "S", -DL); r = near(r, CL + DL * TL["wrist1"], DL)
-    S["wrist_L"] = (far(r, CL + DL * TL["wrist0"], DL), "K", -DL); r = near(r, CL + DL * TL["wrist0"], DL)
-    S["forearm_L"] = (far(r, CL + DL * TL["ring1"], DL), "S", -DL); r = near(r, CL + DL * TL["ring1"], DL)
+    S["hand_L"] = (far(r, CL + DL * TL["wrist1"], DL), "W", -DL); r = near(r, CL + DL * TL["wrist1"], DL)
+    S["wrist_L"] = (far(r, CL + DL * TL["wrist0"], DL), "P", -DL); r = near(r, CL + DL * TL["wrist0"], DL)
+    S["forearm_L"] = (far(r, CL + DL * TL["ring1"], DL), "W", -DL); r = near(r, CL + DL * TL["ring1"], DL)
     S["ring_L"] = (far(r, CL + DL * TL["ring0"], DL), "K", -DL); r = near(r, CL + DL * TL["ring0"], DL)
-    S["elbow_L"] = (near(r, (0, 0, ZL_ELBOW), (0, 0, 1)), "S", (0, 0, 1))
-    S["sleeve_L"] = (slab(r, (0, 0, 1), ZL_ELBOW, ZL_SLEEVE), "K", (0, 0, -1))
-    S["shoulder_L"] = (far(r, (0, 0, ZL_SLEEVE), (0, 0, 1)), "S", (0, 0, -1))
+    S["elbow_L"] = (near(r, (0, 0, ZL_ELBOW), (0, 0, 1)), "W", (0, 0, 1))
+    S["sleeve_L"] = (slab(r, (0, 0, 1), ZL_ELBOW, ZL_SLEEVE), "P", (0, 0, -1))
+    S["shoulder_L"] = (far(r, (0, 0, ZL_SLEEVE), (0, 0, 1)), "W", (0, 0, -1))
     # 右臂
     r = armR
-    S["hand_R"] = (far(r, CR + DR * TR["wrist1"], DR), "S", -DR); r = near(r, CR + DR * TR["wrist1"], DR)
-    S["wrist_R"] = (far(r, CR + DR * TR["wrist0"], DR), "K", -DR); r = near(r, CR + DR * TR["wrist0"], DR)
-    S["forearm_R"] = (far(r, CR + DR * TR["ring1"], DR), "S", -DR); r = near(r, CR + DR * TR["ring1"], DR)
+    S["hand_R"] = (far(r, CR + DR * TR["wrist1"], DR), "W", -DR); r = near(r, CR + DR * TR["wrist1"], DR)
+    S["wrist_R"] = (far(r, CR + DR * TR["wrist0"], DR), "P", -DR); r = near(r, CR + DR * TR["wrist0"], DR)
+    S["forearm_R"] = (far(r, CR + DR * TR["ring1"], DR), "W", -DR); r = near(r, CR + DR * TR["ring1"], DR)
     S["ring_R"] = (far(r, CR + DR * TR["ring0"], DR), "K", -DR); r = near(r, CR + DR * TR["ring0"], DR)
-    S["elbow_R"] = (far(r, C2 + D2 * T2["sleeve1"], D2), "S", -D2)
-    S["sleeve_R"] = (slab(r, D2, T2["sleeve0"], T2["sleeve1"], C2), "K", -D2)
-    S["shoulder_R"] = (near(r, C2 + D2 * T2["sleeve0"], D2), "S", (1, 0, 0))
+    S["elbow_R"] = (far(r, C2 + D2 * T2["sleeve1"], D2), "W", -D2)
+    S["sleeve_R"] = (slab(r, D2, T2["sleeve0"], T2["sleeve1"], C2), "P", -D2)
+    S["shoulder_R"] = (near(r, C2 + D2 * T2["sleeve0"], D2), "W", (1, 0, 0))
 
     out = {}
     for k, (m, col, down) in S.items():
@@ -290,7 +298,37 @@ def segment(whole):
         if len(comps) != 1:
             print(f"  !! {k}: {len(comps)} 个实体", [round(c.volume() / 1000, 1) for c in comps])
         out[k] = (Manifold.batch_boolean(comps, m3.OpType.Add), col, down)
-    return out
+    return out, logo_info
+
+
+def logo_pad(torso):
+    """在胸口压一块平底浅槽作为不干胶 logo 的定位区。返回 (新躯干, 定位信息)。"""
+    L = LOGO
+    xs = np.linspace(L["cx"] - L["w"] / 2 + 2, L["cx"] + L["w"] / 2 - 2, 9)
+    zs = np.linspace(L["cz"] - L["h"] / 2 + 2, L["cz"] + L["h"] / 2 - 2, 5)
+    pts = []
+    for x in xs:
+        for z in zs:
+            col = slab(slab(torso, (1, 0, 0), x - 0.5, x + 0.5), (0, 0, 1), z - 0.5, z + 0.5)
+            col = near(col, (0, 80, 0), (0, 1, 0))                 # 只看前表面
+            pts.append((x, z, col.bounding_box()[1]))
+    pts = np.array(pts)
+    A = np.column_stack([np.ones(len(pts)), pts[:, 0], pts[:, 1]])
+    coef, *_ = np.linalg.lstsq(A, pts[:, 2], rcond=None)            # y = a + b x + c z
+    resid = pts[:, 2] - A @ coef
+    off = resid.max() + L["min_depth"]                              # 槽底平面：最浅处也有 min_depth
+    n = np.array([-coef[1], 1.0, -coef[2]]); n /= np.linalg.norm(n)  # 指向体内
+    p0 = np.array([L["cx"], coef[0] + coef[1] * L["cx"] + coef[2] * L["cz"] + off, L["cz"]])
+    rect = CrossSection.square((L["w"] - 2 * L["r"], L["h"] - 2 * L["r"]), True).offset(L["r"], m3.JoinType.Round)
+    Rinv = np.array([[1, 0, 0, L["cx"]], [0, 0, -1, 0], [0, 1, 0, L["cz"]]], float)   # 截面 (x,z) 沿 Y 拉伸
+    prism = Manifold.extrude(rect, 300).translate((0, 0, -150)).transform(Rinv)
+    cut = near(near(prism, p0, n), (0, 80, 0), (0, 1, 0))
+    new = torso - cut
+    info = dict(centre_xz=[L["cx"], L["cz"]], size_mm=[L["w"], round(L["h"] / abs(n[1]), 1)],
+                depth_mm=[round(float(off - resid.max()), 2), round(float(off - resid.min()), 2)],
+                tilt_deg=round(float(np.degrees(np.arctan(coef[2]))), 1),
+                removed_cm3=round((torso.volume() - new.volume()) / 1000, 2))
+    return new, info
 
 
 def make_visor(head):
@@ -325,12 +363,12 @@ def build(out, do_render=True):
     bb = whole.bounding_box()
     print(f"scale {scale:.4f}  tris {whole.num_tri()}  volume {whole.volume() / 1e6:.2f} L  "
           f"bbox {np.round(bb, 1)}", flush=True)
-    seg = segment(whole)
+    seg, logo_info = segment(whole)
     solids = {k: v[0] for k, v in seg.items()}
     color = {k: v[1] for k, v in seg.items()}
     down = {k: v[2] for k, v in seg.items()}
     body_names = [k for k in solids if not k.startswith("visor")]
-    vsum = sum(solids[k].volume() for k in body_names)
+    vsum = sum(solids[k].volume() for k in body_names) + logo_info["removed_cm3"] * 1000
     print(f"分件体积合计 / 原模型 = {vsum / whole.volume():.5f}", flush=True)
 
     # 重心 (按实体体积) 与底座
@@ -341,7 +379,7 @@ def build(out, do_render=True):
         return (t.sum(1) / 4 * sv[:, None]).sum(0) / sv.sum(), sv.sum()
     com, _ = centroid(whole)
     bcx, bcy = float(round(com[0])), float(round(com[1]))
-    solids["base"] = make_base(bcx, bcy); color["base"] = "K"
+    solids["base"] = make_base(bcx, bcy); color["base"] = "W"
 
     # 背后支撑柱
     back = slab(solids["pelvis"], (0, 0, 1), POST_TIE_Z - 15, POST_TIE_Z + 15)
@@ -368,7 +406,7 @@ def build(out, do_render=True):
         add("hip_" + s, solids, ["thigh_" + s, "hip_" + s], (x + 10, 108, 0), Z, Z_THIGH - 40, Z_THIGH + 40)
     add("hipx_L", solids, ["pelvis", "hip_L"], (X_HIP_L, 120, 690), Xp, -30, 40)
     add("hipx_R", solids, ["pelvis", "hip_R"], (X_HIP_R, 120, 690), (-1, 0, 0), -30, 40)
-    add("waist", solids, ["pelvis", "torso"], (X0, 128, 0), Z, Z_WAIST - 70, Z_WAIST + 70)
+    add("waist", solids, ["pelvis", "waistcol", "torso"], (X0, 128, 0), Z, Z_WAIST - 70, Z_WAIST + 70)
     add("neck", solids, ["torso", "neck", "head"], (X0, 118, 0), Z, Z_NECK0 - 40, Z_NECK1 + 33)
     add("shoulder_L", solids, ["torso", "shoulder_L"], (X_ARM_L, 114, 1068), Xp, -35, 35)
     add("shoulder_R", solids, ["torso", "shoulder_R"], (X_ARM_R, 116, 1070), (-1, 0, 0), -35, 35)
@@ -416,9 +454,9 @@ def build(out, do_render=True):
                          x=round(dims[0], 1), y=round(dims[1], 1), z=round(dims[2], 1),
                          volume_cm3=round(pm.volume() / 1000, 1), area_cm2=round(pm.surface_area() / 100, 1),
                          tris=ntri, printer=fit, note=note))
-    NOTE = {"foot": "脚掌+脚踝一体，脚踝最细处很细：100% 填充", "knee": "膝关节", "pelvis": "骨盆+腰柱，侧躺打印，6 层壁",
-            "neck": "颈环", "visor": "面罩，从正面压入面框并点胶", "sleeve": "肩电机段",
-            "ring": "肘下电机环", "wrist": "腕环", "head": "面框较细，需支撑", "torso": "躯干，最大件"}
+    NOTE = {"foot": "脚掌+脚踝一体，脚踝最细处很细：100% 填充", "knee": "膝关节", "pelvis": "骨盆，侧躺打印，4 层壁", "waistcol": "腰柱，承上身重量：6 层壁 + 40% 填充",
+            "neck": "颈环", "visor": "面罩 (visor_1 黑) / 灯带 (visor_2 紫)，从正面压入面框并点胶", "sleeve": "上臂紫色段",
+            "ring": "肘下电机环", "wrist": "紫色腕环", "head": "面框较细，需支撑", "torso": "躯干，最大件；胸口平底浅槽是 logo 贴纸位"}
     for k in seg:
         world[k] = (solids[k], color[k])
         export(k, solids[k], color[k], down[k], note=next((v for p, v in NOTE.items() if k.startswith(p)), ""))
@@ -429,7 +467,7 @@ def build(out, do_render=True):
     for nm, sx, sy in (("base_front_L", 1, -1), ("base_front_R", -1, -1),
                        ("base_rear_L", 1, 1), ("base_rear_R", -1, 1)):
         tile = far(far(base, (bcx, 0, 0), (sx, 0, 0)), (0, bcy, 0), (0, sy, 0))
-        world[nm] = (tile, "K"); export(nm, tile, "K", (0, 0, -1), note="底座 1/4，顶面朝上")
+        world[nm] = (tile, "W"); export(nm, tile, "W", (0, 0, -1), note="底座 1/4，顶面朝上")
     counts = {}
     for t in T:
         key = (t.size, int(round(t.length - 1)))
@@ -474,7 +512,7 @@ def build(out, do_render=True):
     margin = min(BASE_W / 2 - abs(comw[0] - bcx), BASE_D / 2 - abs(comw[1] - bcy))
     tip = float(np.degrees(np.arctan2(margin, comw[2] + BASE_T)))
     ztop_head = far(slab(whole, (1, 0, 0), -60, 80), (0, 0, 1200), (0, 0, 1)).bounding_box()[5]
-    summary = dict(source="MakerWorld 2512182 G1Static.stl", scale=round(scale, 4),
+    summary = dict(source="MakerWorld 2512182 G1Static.stl", palette=PALETTE, logo_pad=logo_info, scale=round(scale, 4),
                    head_top_mm=round(ztop_head, 1), raised_hand_top_mm=round(bb[5], 1),
                    width_mm=round(bb[3] - bb[0], 1), depth_mm=round(bb[4] - bb[1], 1),
                    base_mm=[BASE_W, BASE_D, BASE_T], base_centre=[bcx, bcy],
