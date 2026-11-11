@@ -1,55 +1,56 @@
 file,name,color,qty,x,y,z,volume_cm3,area_cm2,tris,printer,note
 stl/2_black/foot_R.stl,foot_R,K,1,81.3,193.0,115.0,536.0,601.9,36084,A1 / X2D,脚掌+脚踝一体，脚踝最细处很细：100% 填充
-stl/1_shell_silver/shin_R.stl,shin_R,S,1,93.5,98.9,185.0,1073.0,737.4,24866,A1 / X2D,
+stl/1_white/shin_R.stl,shin_R,W,1,93.5,98.9,185.0,1073.0,737.4,24866,A1 / X2D,
 stl/2_black/knee_R.stl,knee_R,K,1,96.7,117.5,100.0,711.1,707.4,36416,A1 / X2D,膝关节
-stl/1_shell_silver/thigh_R.stl,thigh_R,S,1,107.6,130.7,230.0,1673.7,1205.5,58288,A1 / X2D,
+stl/1_white/thigh_R.stl,thigh_R,W,1,107.6,130.7,230.0,1673.7,1205.5,58288,A1 / X2D,
 stl/2_black/foot_L.stl,foot_L,K,1,80.9,193.0,115.0,537.8,602.6,36112,A1 / X2D,脚掌+脚踝一体，脚踝最细处很细：100% 填充
-stl/1_shell_silver/shin_L.stl,shin_L,S,1,93.7,99.0,185.0,1073.8,738.2,25046,A1 / X2D,
+stl/1_white/shin_L.stl,shin_L,W,1,93.7,99.0,185.0,1073.8,738.2,25046,A1 / X2D,
 stl/2_black/knee_L.stl,knee_L,K,1,97.1,117.6,100.0,710.0,700.1,36186,A1 / X2D,膝关节
-stl/1_shell_silver/thigh_L.stl,thigh_L,S,1,107.2,130.8,230.0,1670.1,1204.4,58168,A1 / X2D,
-stl/1_shell_silver/hip_L.stl,hip_L,S,1,102.2,132.6,123.2,448.9,570.6,24314,A1 / X2D,
-stl/1_shell_silver/hip_R.stl,hip_R,S,1,102.5,130.6,122.0,442.2,557.2,23774,A1 / X2D,
-stl/2_black/pelvis.stl,pelvis,K,1,123.9,200.6,132.0,2003.9,1169.5,61434,A1 / X2D,骨盆+腰柱，侧躺打印，6 层壁
-stl/1_shell_silver/torso.stl,torso,S,1,231.3,163.4,315.0,8095.5,2647.0,81494,A2L,躯干，最大件
+stl/1_white/thigh_L.stl,thigh_L,W,1,107.2,130.8,230.0,1670.1,1204.4,58168,A1 / X2D,
+stl/1_white/hip_L.stl,hip_L,W,1,102.2,132.6,123.2,448.9,570.6,24314,A1 / X2D,
+stl/1_white/hip_R.stl,hip_R,W,1,102.5,130.6,122.0,442.2,557.2,23774,A1 / X2D,
+stl/1_white/pelvis.stl,pelvis,W,1,123.9,150.6,132.0,1806.0,952.5,37458,A1 / X2D,骨盆，侧躺打印，4 层壁
+stl/2_black/waistcol.stl,waistcol,K,1,92.2,87.7,50.0,197.9,329.4,25028,A1 / X2D,腰柱，承上身重量：6 层壁 + 40% 填充
+stl/1_white/torso.stl,torso,W,1,231.3,163.4,315.0,8091.9,2649.4,79842,A2L,躯干，最大件；胸口平底浅槽是 logo 贴纸位
 stl/2_black/neck.stl,neck,K,1,85.4,58.4,17.0,45.0,118.2,4980,A1 / X2D,颈环
-stl/1_shell_silver/head.stl,head,S,1,124.0,163.3,168.0,712.3,989.0,65798,A1 / X2D,面框较细，需支撑
-stl/2_black/visor_1.stl,visor_1,K,1,63.3,52.2,42.0,97.7,124.7,932,A1 / X2D,面罩，从正面压入面框并点胶
-stl/2_black/visor_2.stl,visor_2,K,1,63.9,14.5,47.8,32.4,75.7,864,A1 / X2D,面罩，从正面压入面框并点胶
-stl/1_shell_silver/hand_L.stl,hand_L,S,1,68.6,104.8,146.7,371.5,434.1,39712,A1 / X2D,
-stl/2_black/wrist_L.stl,wrist_L,K,1,55.5,70.5,20.0,40.4,103.4,5544,A1 / X2D,腕环
-stl/1_shell_silver/forearm_L.stl,forearm_L,S,1,67.9,69.0,112.0,279.7,360.3,24000,A1 / X2D,
+stl/1_white/head.stl,head,W,1,124.0,163.3,168.0,712.3,989.0,65798,A1 / X2D,面框较细，需支撑
+stl/2_black/visor_1.stl,visor_1,K,1,63.3,52.2,42.0,97.7,124.7,932,A1 / X2D,面罩 (visor_1 黑) / 灯带 (visor_2 紫)，从正面压入面框并点胶
+stl/3_purple/visor_2.stl,visor_2,P,1,63.9,14.5,47.8,32.4,75.7,864,A1 / X2D,面罩 (visor_1 黑) / 灯带 (visor_2 紫)，从正面压入面框并点胶
+stl/1_white/hand_L.stl,hand_L,W,1,68.6,104.8,146.7,371.5,434.1,39712,A1 / X2D,
+stl/3_purple/wrist_L.stl,wrist_L,P,1,55.5,70.5,20.0,40.4,103.4,5544,A1 / X2D,紫色腕环
+stl/1_white/forearm_L.stl,forearm_L,W,1,67.9,69.0,112.0,279.7,360.3,24000,A1 / X2D,
 stl/2_black/ring_L.stl,ring_L,K,1,68.8,59.6,32.0,60.8,140.6,7950,A1 / X2D,肘下电机环
-stl/1_shell_silver/elbow_L.stl,elbow_L,S,1,84.6,109.5,107.0,407.2,399.2,20178,A1 / X2D,
-stl/2_black/sleeve_L.stl,sleeve_L,K,1,82.9,87.5,106.0,332.3,396.3,21466,A1 / X2D,肩电机段
-stl/1_shell_silver/shoulder_L.stl,shoulder_L,S,1,80.3,98.4,103.1,482.1,415.2,21216,A1 / X2D,
-stl/1_shell_silver/hand_R.stl,hand_R,S,1,82.6,101.6,148.1,376.5,437.2,40294,A1 / X2D,
-stl/2_black/wrist_R.stl,wrist_R,K,1,62.2,70.9,20.0,42.0,104.6,5356,A1 / X2D,腕环
-stl/1_shell_silver/forearm_R.stl,forearm_R,S,1,73.5,69.1,112.0,279.9,361.5,23858,A1 / X2D,
+stl/1_white/elbow_L.stl,elbow_L,W,1,84.6,109.5,107.0,407.2,399.2,20178,A1 / X2D,
+stl/3_purple/sleeve_L.stl,sleeve_L,P,1,82.9,87.5,106.0,332.3,396.3,21466,A1 / X2D,上臂紫色段
+stl/1_white/shoulder_L.stl,shoulder_L,W,1,80.3,98.4,103.1,482.1,415.2,21216,A1 / X2D,
+stl/1_white/hand_R.stl,hand_R,W,1,82.6,101.6,148.1,376.5,437.2,40294,A1 / X2D,
+stl/3_purple/wrist_R.stl,wrist_R,P,1,62.2,70.9,20.0,42.0,104.6,5356,A1 / X2D,紫色腕环
+stl/1_white/forearm_R.stl,forearm_R,W,1,73.5,69.1,112.0,279.9,361.5,23858,A1 / X2D,
 stl/2_black/ring_R.stl,ring_R,K,1,68.3,60.7,32.0,61.2,139.8,8272,A1 / X2D,肘下电机环
-stl/1_shell_silver/elbow_R.stl,elbow_R,S,1,77.4,114.2,109.6,412.5,417.6,21750,A1 / X2D,
-stl/2_black/sleeve_R.stl,sleeve_R,K,1,71.8,84.3,99.0,275.1,387.3,20088,A1 / X2D,肩电机段
-stl/1_shell_silver/shoulder_R.stl,shoulder_R,S,1,123.3,111.1,80.9,425.7,407.1,18294,A1 / X2D,
+stl/1_white/elbow_R.stl,elbow_R,W,1,77.4,114.2,109.6,412.5,417.6,21750,A1 / X2D,
+stl/3_purple/sleeve_R.stl,sleeve_R,P,1,71.8,84.3,99.0,275.1,387.3,20088,A1 / X2D,上臂紫色段
+stl/1_white/shoulder_R.stl,shoulder_R,W,1,123.3,111.1,80.9,425.7,407.1,18294,A1 / X2D,
 stl/2_black/post_1.stl,post_1,K,1,30.0,240.0,30.0,199.9,345.4,44,A1 / X2D,背后支撑柱，平躺打印，4 层壁 + 40% 填充
 stl/2_black/post_2.stl,post_2,K,1,30.0,240.0,30.0,199.9,345.4,44,A1 / X2D,背后支撑柱，平躺打印，4 层壁 + 40% 填充
 stl/2_black/post_3.stl,post_3,K,1,30.0,245.0,30.0,204.4,346.0,48,A1 / X2D,背后支撑柱，平躺打印，4 层壁 + 40% 填充
-stl/2_black/base_front_L.stl,base_front_L,K,1,220.0,210.0,30.0,1353.5,1187.3,226,A1 / X2D,底座 1/4，顶面朝上
-stl/2_black/base_front_R.stl,base_front_R,K,1,220.0,210.0,30.0,1353.5,1187.3,228,A1 / X2D,底座 1/4，顶面朝上
-stl/2_black/base_rear_L.stl,base_rear_L,K,1,220.0,210.0,30.0,1359.9,1175.7,228,A1 / X2D,底座 1/4，顶面朝上
-stl/2_black/base_rear_R.stl,base_rear_R,K,1,220.0,210.0,30.0,1360.9,1174.5,226,A1 / X2D,底座 1/4，顶面朝上
-stl/3_connectors/tenon_T16x44.stl,tenon_T16x44,H,1,16.0,44.0,16.0,10.9,30.4,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 post_base
-stl/3_connectors/tenon_T16x59.stl,tenon_T16x59,H,2,16.0,59.0,16.0,14.7,39.6,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 post_12 post_23
-stl/3_connectors/tenon_T16x69.stl,tenon_T16x69,H,2,16.0,69.0,16.0,17.2,45.7,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 hipx_L hipx_R
-stl/3_connectors/tenon_T16x76.stl,tenon_T16x76,H,1,16.0,76.0,16.0,19.0,50.0,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 post_tie
-stl/3_connectors/tenon_T16x84.stl,tenon_T16x84,H,2,16.0,84.0,16.0,21.0,54.9,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 wrist_L wrist_R
-stl/3_connectors/tenon_T16x139.stl,tenon_T16x139,H,1,16.0,139.0,16.0,35.0,88.6,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 waist
-stl/3_connectors/tenon_T16x175.stl,tenon_T16x175,H,1,16.0,175.0,16.0,44.1,110.6,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 sleeve_L
-stl/3_connectors/tenon_T16x179.stl,tenon_T16x179,H,2,16.0,179.0,16.0,45.1,113.0,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 knee_L knee_R
-stl/3_connectors/tenon_T24x26.stl,tenon_T24x26,H,2,24.0,26.0,24.0,14.5,33.4,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 footbase_L footbase_R
-stl/3_connectors/tenon_T24x67.stl,tenon_T24x67,H,2,24.0,67.0,24.0,38.0,71.6,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 ankle_L ankle_R
-stl/3_connectors/tenon_T24x69.stl,tenon_T24x69,H,2,24.0,69.0,24.0,39.2,73.5,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 shoulder_L shoulder_R
-stl/3_connectors/tenon_T24x79.stl,tenon_T24x79,H,2,24.0,79.0,24.0,44.9,82.8,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 hip_L hip_R
-stl/3_connectors/tenon_T24x89.stl,tenon_T24x89,H,1,24.0,89.0,24.0,50.7,92.1,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 neck
-stl/3_connectors/tenon_T24x101.stl,tenon_T24x101,H,2,24.0,101.0,24.0,57.5,103.3,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 ring_L ring_R
-stl/3_connectors/tenon_T24x168.stl,tenon_T24x168,H,1,24.0,168.0,24.0,95.9,165.7,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 sleeve_R
-stl/3_connectors/bowtie_key.stl,bowtie_key,H,4,50.0,26.0,9.8,9.3,34.3,28,A1 / X2D,底座蝴蝶键，从底面压入
-stl/3_connectors/fit_test_coupon.stl,fit_test_coupon,H,1,88.0,44.0,20.0,60.2,145.6,52,A1 / X2D,先打这个，试各规格榫条的松紧
+stl/1_white/base_front_L.stl,base_front_L,W,1,220.0,210.0,30.0,1353.5,1187.3,226,A1 / X2D,底座 1/4，顶面朝上
+stl/1_white/base_front_R.stl,base_front_R,W,1,220.0,210.0,30.0,1353.5,1187.3,228,A1 / X2D,底座 1/4，顶面朝上
+stl/1_white/base_rear_L.stl,base_rear_L,W,1,220.0,210.0,30.0,1359.9,1175.7,228,A1 / X2D,底座 1/4，顶面朝上
+stl/1_white/base_rear_R.stl,base_rear_R,W,1,220.0,210.0,30.0,1360.9,1174.5,226,A1 / X2D,底座 1/4，顶面朝上
+stl/4_connectors/tenon_T16x44.stl,tenon_T16x44,H,1,16.0,44.0,16.0,10.9,30.4,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 post_base
+stl/4_connectors/tenon_T16x59.stl,tenon_T16x59,H,2,16.0,59.0,16.0,14.7,39.6,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 post_12 post_23
+stl/4_connectors/tenon_T16x69.stl,tenon_T16x69,H,2,16.0,69.0,16.0,17.2,45.7,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 hipx_L hipx_R
+stl/4_connectors/tenon_T16x76.stl,tenon_T16x76,H,1,16.0,76.0,16.0,19.0,50.0,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 post_tie
+stl/4_connectors/tenon_T16x84.stl,tenon_T16x84,H,2,16.0,84.0,16.0,21.0,54.9,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 wrist_L wrist_R
+stl/4_connectors/tenon_T16x139.stl,tenon_T16x139,H,1,16.0,139.0,16.0,35.0,88.6,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 waist
+stl/4_connectors/tenon_T16x175.stl,tenon_T16x175,H,1,16.0,175.0,16.0,44.1,110.6,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 sleeve_L
+stl/4_connectors/tenon_T16x179.stl,tenon_T16x179,H,2,16.0,179.0,16.0,45.1,113.0,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 knee_L knee_R
+stl/4_connectors/tenon_T24x26.stl,tenon_T24x26,H,2,24.0,26.0,24.0,14.5,33.4,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 footbase_L footbase_R
+stl/4_connectors/tenon_T24x67.stl,tenon_T24x67,H,2,24.0,67.0,24.0,38.0,71.6,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 ankle_L ankle_R
+stl/4_connectors/tenon_T24x69.stl,tenon_T24x69,H,2,24.0,69.0,24.0,39.2,73.5,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 shoulder_L shoulder_R
+stl/4_connectors/tenon_T24x79.stl,tenon_T24x79,H,2,24.0,79.0,24.0,44.9,82.8,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 hip_L hip_R
+stl/4_connectors/tenon_T24x89.stl,tenon_T24x89,H,1,24.0,89.0,24.0,50.7,92.1,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 neck
+stl/4_connectors/tenon_T24x101.stl,tenon_T24x101,H,2,24.0,101.0,24.0,57.5,103.3,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 ring_L ring_R
+stl/4_connectors/tenon_T24x168.stl,tenon_T24x168,H,1,24.0,168.0,24.0,95.9,165.7,44,A1 / X2D,榫条，平躺打印，4 层壁 + 40% 填充；用于 sleeve_R
+stl/4_connectors/bowtie_key.stl,bowtie_key,H,4,50.0,26.0,9.8,9.3,34.3,28,A1 / X2D,底座蝴蝶键，从底面压入
+stl/4_connectors/fit_test_coupon.stl,fit_test_coupon,H,1,88.0,44.0,20.0,60.2,145.6,52,A1 / X2D,先打这个，试各规格榫条的松紧

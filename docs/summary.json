@@ -1,5 +1,26 @@
 {
  "source": "MakerWorld 2512182 G1Static.stl",
+ "palette": {
+  "W": "#ECE9E0",
+  "K": "#2E2E34",
+  "P": "#5C34D6"
+ },
+ "logo_pad": {
+  "centre_xz": [
+   4.0,
+   1050.0
+  ],
+  "size_mm": [
+   112.0,
+   23.8
+  ],
+  "depth_mm": [
+   0.4,
+   2.5
+  ],
+  "tilt_deg": 22.3,
+  "removed_cm3": 3.54
+ },
  "scale": 1.1469,
  "head_top_mm": 1320.0,
  "raised_hand_top_mm": 1551.1,
@@ -15,20 +36,21 @@
   99.0
  ],
  "est_grams": {
-  "K": 2929,
-  "S": 4008,
+  "K": 1021,
+  "W": 5704,
+  "P": 224,
   "H": 364
  },
- "est_total_g": 7301,
+ "est_total_g": 7313,
  "centre_of_mass_mm": [
   6.4,
-  94.5,
-  742.8
+  94.6,
+  743.1
  ],
  "tip_angle_deg": 14.9,
  "interference": [],
- "files": 54,
- "pieces": 66,
+ "files": 55,
+ "pieces": 67,
  "tenons": {
   "footbase_L": "T24x26",
   "ankle_L": "T24x67",
