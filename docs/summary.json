@@ -1,23 +1,58 @@
 {
- "height_mm": 1300.0,
+ "source": "MakerWorld 2512182 G1Static.stl",
+ "scale": 1.1469,
+ "head_top_mm": 1320.0,
+ "raised_hand_top_mm": 1551.1,
+ "width_mm": 498.0,
+ "depth_mm": 376.5,
  "base_mm": [
-  480.0,
-  360.0,
-  35.0
+  440.0,
+  420.0,
+  30.0
+ ],
+ "base_centre": [
+  7.0,
+  99.0
  ],
  "est_grams": {
-  "W": 6567,
-  "P": 37,
-  "K": 1053,
-  "H": 461
+  "K": 2929,
+  "S": 4008,
+  "H": 364
  },
- "est_total_g": 8119,
+ "est_total_g": 7301,
  "centre_of_mass_mm": [
-  0.0,
-  -4.0,
-  579.9
+  6.4,
+  94.5,
+  742.8
  ],
+ "tip_angle_deg": 14.9,
  "interference": [],
  "files": 54,
- "pieces": 83
+ "pieces": 66,
+ "tenons": {
+  "footbase_L": "T24x26",
+  "ankle_L": "T24x67",
+  "knee_L": "T16x179",
+  "hip_L": "T24x79",
+  "footbase_R": "T24x26",
+  "ankle_R": "T24x67",
+  "knee_R": "T16x179",
+  "hip_R": "T24x79",
+  "hipx_L": "T16x69",
+  "hipx_R": "T16x69",
+  "waist": "T16x139",
+  "neck": "T24x89",
+  "shoulder_L": "T24x69",
+  "shoulder_R": "T24x69",
+  "sleeve_L": "T16x175",
+  "sleeve_R": "T24x168",
+  "ring_L": "T24x101",
+  "wrist_L": "T16x84",
+  "ring_R": "T24x101",
+  "wrist_R": "T16x84",
+  "post_base": "T16x44",
+  "post_12": "T16x59",
+  "post_23": "T16x59",
+  "post_tie": "T16x76"
+ }
 }
