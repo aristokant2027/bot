@@ -1,10 +1,12 @@
 """Tiny dependency-free preview renderer (point-splat z-buffer, orthographic)."""
 import os
+import warnings
 import numpy as np
 from PIL import Image
 
-COL = {"W": (236, 233, 224), "K": (46, 46, 52), "P": (92, 52, 214), "H": (230, 150, 40)}
+COL = {"S": (198, 201, 206), "W": (236, 233, 224), "K": (46, 46, 52), "H": (230, 150, 40)}
 BG = (244, 244, 248)
+warnings.filterwarnings("ignore")
 
 
 def _view(az, el):
@@ -94,5 +96,5 @@ def render_all(world, docs):
         sheet.paste(i, (x, h - i.height)); x += i.width
     sheet.save(os.path.join(docs, "preview_sheet.png"))
     render(_items(world, explode=0.55), os.path.join(docs, "preview_exploded.png"), -25, 10, scale=0.42)
-    head = [(v, f, c) for (v, f, c), n in zip(_items(world), world) if v[:, 2].min() > 880 and not n.startswith("tenon")]
+    head = [(v, f, c) for (v, f, c), n in zip(_items(world), world) if v[:, 2].min() > 1100 and v[:, 0].min() > -110 and not n.startswith("tenon")]
     render(head, os.path.join(docs, "preview_bust.png"), -28, 8, scale=1.6)

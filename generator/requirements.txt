@@ -1,5 +1,4 @@
 numpy
-scikit-image
+scipy
 manifold3d
-matplotlib
 pillow
