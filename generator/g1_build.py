@@ -495,10 +495,10 @@ def build(out, do_render=True):
                          x=round(dims[0], 1), y=round(dims[1], 1), z=round(dims[2], 1),
                          volume_cm3=round(pm.volume() / 1000, 1), area_cm2=round(pm.surface_area() / 100, 1),
                          tris=ntri, printer=fit, note=note))
-    NOTE = {"foot": "脚掌+脚踝一体，脚踝最细处很细：100% 填充", "knee": "膝关节", "pelvis": "骨盆，侧躺打印，4 层壁", "waistcol": "腰柱，承上身重量：6 层壁 + 40% 填充",
+    NOTE = {"foot": "脚掌+脚踝一体，脚踝最细处很细：8 层壁 + 40% 填充", "knee": "膝关节", "pelvis": "骨盆，侧躺打印，4 层壁", "waistcol": "腰柱，承上身重量：6 层壁 + 40% 填充",
             "neck": "颈环", "sleeve": "上臂紫色段",
             "head_cap": "头顶白色甲片，扣进头芯的座槽并点胶，需支撑", "head_cheek": "下后白色甲片，从下往上套进头芯座槽并点胶",
-            "head_eye": "紫色目线，从正面压进头芯的槽并点胶", "halo_strut": "光环支杆，平躺打印，100% 填充",
+            "head_eye": "紫色目线，从正面压进头芯的槽并点胶", "halo_strut": "光环支杆，平躺打印，和脚同一组参数",
             "halo": "脑后紫色光环，削平的背面贴床，加 brim；两端节点套在支杆上并点胶",
             "ring": "肘下电机环", "wrist": "紫色腕环", "head": "亮黑头芯 (含颈座)，颈座朝下，需支撑", "torso": "躯干，最大件；胸口平底浅槽是 logo 贴纸位"}
     for k in seg:

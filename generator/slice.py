@@ -20,7 +20,7 @@ PROC = {       # 参数组 -> 对工艺预设的改动
     "shell": {"wall_loops": "3", "sparse_infill_density": "15%", **SUP},
     "flat": {"wall_loops": "3", "sparse_infill_density": "15%", **NOSUP},
     "conn": {"wall_loops": "4", "sparse_infill_density": "40%", **NOSUP},
-    "solid": {"wall_loops": "4", "sparse_infill_density": "100%", **SUP},
+    "strong": {"wall_loops": "8", "sparse_infill_density": "40%", **SUP},   # 脚踝最细处基本全是壁；100% 填充要多用约 0.8 kg
     "waist": {"wall_loops": "6", "sparse_infill_density": "40%", **SUP},
     "pelvis": {"wall_loops": "4", "sparse_infill_density": "15%", **SUP},
     "halo": {"wall_loops": "3", "sparse_infill_density": "15%", **NOSUP, "brim_type": "outer_only", "brim_width": "5"},
@@ -28,7 +28,7 @@ PROC = {       # 参数组 -> 对工艺预设的改动
 JOBS = [       # (文件名, 机器, 参数组, 颜色, [零件名或通配])
     ("x2d_01_先打_试配件", "X2D", "conn", "任意", ["fit_test_coupon", "tenon_T16x44", "tenon_T24x26:1"]),
     ("x2d_02_连接件和支撑柱", "X2D", "conn", "黑", ["tenon_*", "bowtie_key", "post_*"]),
-    ("x2d_03_黑_脚和支杆_实心", "X2D", "solid", "黑", ["foot_*", "halo_strut_*"]),
+    ("x2d_03_黑_脚和支杆_加强", "X2D", "strong", "黑", ["foot_*", "halo_strut_*"]),
     ("x2d_04_黑_腰柱", "X2D", "waist", "黑", ["waistcol"]),
     ("x2d_05_黑_头芯和关节", "X2D", "shell", "黑", ["head", "knee_*", "neck", "ring_*"]),
     ("x2d_06_紫_上臂腕环目线", "X2D", "shell", "紫", ["sleeve_*", "wrist_*", "head_eye"]),
@@ -141,8 +141,11 @@ def main():
             print("\n".join(log[-15:]), flush=True)
     for fn in glob.glob(os.path.join(a.out, "plate_*.gcode")) + glob.glob(os.path.join(a.out, "result.json")):
         os.remove(fn)
-    if not a.only:
-        json.dump(report, open(os.path.join(a.out, "slice_report.json"), "w"), indent=1, ensure_ascii=False)
+    rp = os.path.join(a.out, "slice_report.json")
+    if a.only and os.path.exists(rp):                 # 只重切一部分时，把结果并回原报告
+        done = {r["job"]: r for r in report}
+        report = [done.pop(r["job"], r) for r in json.load(open(rp))] + list(done.values())
+    json.dump(report, open(rp, "w"), indent=1, ensure_ascii=False)
 
 
 if __name__ == "__main__":
