@@ -35,7 +35,9 @@ def render(items, path, az=0, el=8, scale=0.6, ss=2, pad=30):
         vis = n @ fwd < 0.05
         tri, n = tri[vis], n[vis]
         shade = 0.38 + 0.62 * np.clip(n @ light, 0, 1) + 0.12 * np.clip(-(n @ fwd), 0, 1)
-        col = np.array(COL[c], np.float32)[None] * np.minimum(shade, 1.1)[:, None]
+        hv = light - fwd; hv = hv / np.linalg.norm(hv)              # 黑、紫件画成亮面
+        spec = np.clip(n @ hv, 0, 1) ** 28 * {"K": 0.6, "P": 0.35}.get(c, 0.10)
+        col = np.array(COL[c], np.float32)[None] * np.minimum(shade, 1.1)[:, None] + 255 * spec[:, None]
         P = np.stack([(tri @ right - u0) * s, (w1 - tri @ up) * s, tri @ fwd], -1)
         e = np.maximum.reduce([np.linalg.norm(P[:, i, :2] - P[:, j, :2], axis=1)
                                for i, j in ((0, 1), (1, 2), (2, 0))])

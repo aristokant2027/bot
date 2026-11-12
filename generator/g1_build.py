@@ -268,10 +268,8 @@ def segment(whole):
     torso, logo_info = logo_pad(slab(body, (0, 0, 1), Z_WAIST, Z_NECK0))
     S["torso"] = (torso, "W", (0, 0, -1))
     S["neck"] = (slab(body, (0, 0, 1), Z_NECK0, Z_NECK1), "K", (0, 0, -1))
-    head = far(body, (0, 0, Z_NECK1), (0, 0, 1))
-    S["head"] = (head, "W", (0, 0, -1))
-    for i, vz in enumerate(make_visor(head)):
-        S[f"visor_{i + 1}"] = (vz, "K" if i == 0 else "P", (0, 1, 0))     # 上方细条做紫色灯带
+    SRC["head_vol"] = far(body, (0, 0, Z_NECK1), (0, 0, 1)).volume()     # 原头不用，换成光环头
+    S.update(make_halo_head())
 
     # 左臂：手 <- 腕 <- 前臂 <- 环 <- 肘 | 袖 | 肩
     r = armL
@@ -331,29 +329,72 @@ def logo_pad(torso):
     return new, info
 
 
-def make_visor(head):
-    """面罩：从正面压进面框开口的黑色镶件。"""
-    Y_BACK = 78.0
-    front = near(head, (0, Y_BACK, 0), (0, 1, 0))
-    R = np.array([[1, 0, 0, 0], [0, 0, 1, 0], [0, -1, 0, 0]], float)       # (x,y,z)->(x,z,-y)
+SRC = {}
+HEAD_C = np.array([7.5, 108.0, 1240.0])                    # 头部缩放中心
+HALO = dict(c=(7.5, 150.0, 1262.0), R=74.0, tube=4.2, tilt=72.0, node=8.0, flat=3.8, bar=5.0)
+
+
+def _ell(rx, ry, rz, x, y, z):
+    return Manifold.sphere(1, 128).scale((rx, ry, rz)).translate((x, y, z))
+
+
+def _scl(m, k):
+    return m.translate(tuple(-HEAD_C)).scale((k, k, k)).translate(tuple(HEAD_C))
+
+
+def make_halo_head():
+    """光环头：亮黑头芯 + 白色甲片 (前顶 / 后顶 / 下后) + 紫色目线 + 脑后紫色光环 + 两根黑色支杆。"""
+    cx = float(HEAD_C[0])
+    h = Manifold.batch_hull([_ell(60, 76, 60, cx, 112, 1260), _ell(41, 46, 40, cx, 82, 1206),
+                             _ell(30, 30, 16, cx, 126, 1184)])
+    h = far(h, (0, 0, 1166), (0, 0, 1))
+    unit = lambda v: np.asarray(v, float) / np.linalg.norm(v)
+    capn, capp = unit((0, 0.45, 1)), np.array([cx, 100, 1262.0])
+    gn, gp = unit((0, 1, -0.2)), np.array([cx, 130, 1240.0])
+    chn, chp = unit((0, 0.5, -1)), np.array([cx, 96, 1222.0])
+
+    def regions(m, d):                      # d>0: 各边界外扩 d (给座槽留间隙)
+        cap = far(m, capp - capn * d, capn)
+        cap_f = near(cap, gp - gn * (1.5 - d), gn)
+        cap_r = far(cap, gp + gn * (1.5 - d), gn)
+        ch = far(far(m, chp - chn * d, chn), (0, 74 - d, 0), (0, 1, 0))
+        ch = near(ch, capp - capn * (3.0 - d), capn)
+        return cap_f, cap_r, ch
+
+    core0 = _scl(h, 0.955)
+    cap_f, cap_r, cheek = regions(h - _scl(h, 0.90), 0.0)
+    core = core0
+    for seat in regions(_scl(h, 1.05) - _scl(h, 0.897), CLR + 0.05):
+        core -= seat
+    stub = lambda g, z0, z1: Manifold.cylinder(z1 - z0, 1, 1, 96).scale((42 + g, 31 + g, 1)).translate((7.6, 119, z0))
+    core += stub(0, Z_NECK1, Z_NECK1 + 24)                                # 颈座，和头芯一体
+    core += stub(0, Z_NECK1 + 24, Z_NECK1 + 45) ^ _scl(h, 0.93)           # 颈座往上延伸进头芯，给榫孔留壁厚
+    cheek -= stub(CLR + 0.1, Z_NECK1 - 10, Z_NECK1 + 46)
+    # 目线：从正面压进头芯的紫色条
     Rinv = np.array([[1, 0, 0, 0], [0, 0, -1, 0], [0, 1, 0, 0]], float)
-    sil = front.transform(R).project()
-    holes = []
-    for p in sil.to_polygons():
-        p = np.asarray(p)
-        a = 0.5 * np.sum(p[:, 0] * np.roll(p[:, 1], -1) - np.roll(p[:, 0], -1) * p[:, 1])
-        if a < -150:
-            holes.append(CrossSection([p[::-1]]).offset(-0.3, m3.JoinType.Round))
-    out = []
-    hull = front.hull()
-    for h in holes:
-        prism = Manifold.extrude(h, 400).translate((0, 0, -200)).transform(Rinv)
-        plug = ((hull - front) ^ prism).translate((0, 4, 0)) - head
-        plug = near(plug, (0, Y_BACK, 0), (0, 1, 0))
-        comps = [c for c in plug.decompose() if c.volume() > 2000]
-        if comps:
-            out.append(max(comps, key=lambda c: c.volume()))
-    return sorted(out, key=lambda c: -c.volume())
+    rect = CrossSection.square((80, 6), True).translate((cx, 1243.5))
+    prism = lambda cs: Manifold.extrude(cs, 400).translate((0, 0, -200)).transform(Rinv)
+    eye = near((core0 - _scl(h, 0.86)) ^ prism(rect), (0, 80, 0), (0, 1, 0))
+    core -= near((_scl(h, 1.05) - _scl(h, 0.857)) ^ prism(rect.offset(CLR, m3.JoinType.Miter)), (0, 80.3, 0), (0, 1, 0))
+    # 光环：背面削平便于贴床打印，水平直径两端加节点接支杆；下端贴着头壳断开
+    H = HALO; c = np.array(H["c"])
+    ring = Manifold.revolve(CrossSection.circle(H["tube"], 48).translate((H["R"], 0)), 160)
+    for sgn in (-1, 1):
+        ring += Manifold.sphere(H["node"], 64).translate((sgn * H["R"], 0, 0))
+    ring = far(ring, (0, 0, -H["flat"]), (0, 0, 1)).rotate((H["tilt"], 0, 0)).translate(tuple(c)) - _scl(h, 1.012)
+    th = np.radians(H["tilt"]); ring_down = (0, float(np.sin(th)), float(-np.cos(th)))
+    out = {}
+    for sgn, nm in ((1, "L"), (-1, "R")):
+        mid = (cx + sgn * 56.0, c[1], c[2])
+        a = H["tilt"] - 90.0                                  # 支杆截面跟着光环平面转，节点孔壁才均匀
+        bar = Manifold.cube((40.0, H["bar"], H["bar"]), True).rotate((a, 0, 0)).translate(mid)
+        cut = Manifold.cube((40.6, H["bar"] + 2 * CLR, H["bar"] + 2 * CLR), True).rotate((a, 0, 0)).translate(mid)
+        core -= cut; cap_r -= cut; ring -= cut
+        out["halo_strut_" + nm] = (bar, "K", (0, float(np.sin(np.radians(a))), float(-np.cos(np.radians(a)))))
+    out.update({"head": (core, "K", (0, 0, -1)), "head_cap_f": (cap_f, "W", (0, 0, -1)),
+                "head_cap_r": (cap_r, "W", (0, 0, -1)), "head_cheek": (cheek, "W", (0, 0, -1)),
+                "head_eye": (eye, "P", (0, 0, -1)), "halo": (ring, "P", ring_down)})
+    return out
 
 
 # ------------------------------------------------------------ 总装
@@ -367,8 +408,8 @@ def build(out, do_render=True):
     solids = {k: v[0] for k, v in seg.items()}
     color = {k: v[1] for k, v in seg.items()}
     down = {k: v[2] for k, v in seg.items()}
-    body_names = [k for k in solids if not k.startswith("visor")]
-    vsum = sum(solids[k].volume() for k in body_names) + logo_info["removed_cm3"] * 1000
+    body_names = [k for k in solids if not k.startswith(("head", "halo"))]
+    vsum = sum(solids[k].volume() for k in body_names) + logo_info["removed_cm3"] * 1000 + SRC["head_vol"]
     print(f"分件体积合计 / 原模型 = {vsum / whole.volume():.5f}", flush=True)
 
     # 重心 (按实体体积) 与底座
@@ -455,8 +496,11 @@ def build(out, do_render=True):
                          volume_cm3=round(pm.volume() / 1000, 1), area_cm2=round(pm.surface_area() / 100, 1),
                          tris=ntri, printer=fit, note=note))
     NOTE = {"foot": "脚掌+脚踝一体，脚踝最细处很细：100% 填充", "knee": "膝关节", "pelvis": "骨盆，侧躺打印，4 层壁", "waistcol": "腰柱，承上身重量：6 层壁 + 40% 填充",
-            "neck": "颈环", "visor": "面罩 (visor_1 黑) / 灯带 (visor_2 紫)，从正面压入面框并点胶", "sleeve": "上臂紫色段",
-            "ring": "肘下电机环", "wrist": "紫色腕环", "head": "面框较细，需支撑", "torso": "躯干，最大件；胸口平底浅槽是 logo 贴纸位"}
+            "neck": "颈环", "sleeve": "上臂紫色段",
+            "head_cap": "头顶白色甲片，扣进头芯的座槽并点胶，需支撑", "head_cheek": "下后白色甲片，从下往上套进头芯座槽并点胶",
+            "head_eye": "紫色目线，从正面压进头芯的槽并点胶", "halo_strut": "光环支杆，平躺打印，100% 填充",
+            "halo": "脑后紫色光环，削平的背面贴床，加 brim；两端节点套在支杆上并点胶",
+            "ring": "肘下电机环", "wrist": "紫色腕环", "head": "亮黑头芯 (含颈座)，颈座朝下，需支撑", "torso": "躯干，最大件；胸口平底浅槽是 logo 贴纸位"}
     for k in seg:
         world[k] = (solids[k], color[k])
         export(k, solids[k], color[k], down[k], note=next((v for p, v in NOTE.items() if k.startswith(p)), ""))
@@ -511,9 +555,9 @@ def build(out, do_render=True):
     comw = mc / msum
     margin = min(BASE_W / 2 - abs(comw[0] - bcx), BASE_D / 2 - abs(comw[1] - bcy))
     tip = float(np.degrees(np.arctan2(margin, comw[2] + BASE_T)))
-    ztop_head = far(slab(whole, (1, 0, 0), -60, 80), (0, 0, 1200), (0, 0, 1)).bounding_box()[5]
+    ztop_head = max(solids[k].bounding_box()[5] for k in ("head_cap_f", "head_cap_r"))
     summary = dict(source="MakerWorld 2512182 G1Static.stl", palette=PALETTE, logo_pad=logo_info, scale=round(scale, 4),
-                   head_top_mm=round(ztop_head, 1), raised_hand_top_mm=round(bb[5], 1),
+                   head_top_mm=round(ztop_head, 1), halo_top_mm=round(solids["halo"].bounding_box()[5], 1), raised_hand_top_mm=round(bb[5], 1),
                    width_mm=round(bb[3] - bb[0], 1), depth_mm=round(bb[4] - bb[1], 1),
                    base_mm=[BASE_W, BASE_D, BASE_T], base_centre=[bcx, bcy],
                    est_grams={k: round(v) for k, v in est.items()}, est_total_g=round(sum(est.values())),
