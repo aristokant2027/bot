@@ -23,6 +23,7 @@
  },
  "scale": 1.1469,
  "head_top_mm": 1320.0,
+ "halo_top_mm": 1336.6,
  "raised_hand_top_mm": 1551.1,
  "width_mm": 498.0,
  "depth_mm": 376.5,
@@ -36,21 +37,21 @@
   99.0
  ],
  "est_grams": {
-  "K": 1021,
-  "W": 5704,
-  "P": 224,
-  "H": 364
+  "K": 1259,
+  "W": 5615,
+  "P": 230,
+  "H": 356
  },
- "est_total_g": 7313,
+ "est_total_g": 7460,
  "centre_of_mass_mm": [
   6.4,
-  94.6,
-  743.1
+  95.8,
+  755.6
  ],
- "tip_angle_deg": 14.9,
+ "tip_angle_deg": 14.7,
  "interference": [],
- "files": 55,
- "pieces": 67,
+ "files": 60,
+ "pieces": 72,
  "tenons": {
   "footbase_L": "T24x26",
   "ankle_L": "T24x67",
@@ -63,7 +64,7 @@
   "hipx_L": "T16x69",
   "hipx_R": "T16x69",
   "waist": "T16x139",
-  "neck": "T24x89",
+  "neck": "T16x89",
   "shoulder_L": "T24x69",
   "shoulder_R": "T24x69",
   "sleeve_L": "T16x175",

@@ -1,0 +1,193 @@
+[
+ {
+  "job": "x2d_01_先打_试配件",
+  "machine": "X2D",
+  "colour": "任意",
+  "process": "conn",
+  "pieces": 3,
+  "ok": true,
+  "returncode": 0,
+  "plates": 1,
+  "hours": 1.3,
+  "grams": 61,
+  "plate_hours": [
+   1.3
+  ]
+ },
+ {
+  "job": "x2d_02_连接件和支撑柱",
+  "machine": "X2D",
+  "colour": "黑",
+  "process": "conn",
+  "pieces": 31,
+  "ok": true,
+  "returncode": 0,
+  "plates": 2,
+  "hours": 17.2,
+  "grams": 966,
+  "plate_hours": [
+   11.3,
+   5.9
+  ]
+ },
+ {
+  "job": "x2d_03_黑_脚和支杆_加强",
+  "machine": "X2D",
+  "colour": "黑",
+  "process": "strong",
+  "pieces": 4,
+  "ok": true,
+  "returncode": 0,
+  "plates": 1,
+  "hours": 17.3,
+  "grams": 762,
+  "plate_hours": [
+   17.3
+  ]
+ },
+ {
+  "job": "x2d_04_黑_腰柱",
+  "machine": "X2D",
+  "colour": "黑",
+  "process": "waist",
+  "pieces": 1,
+  "ok": true,
+  "returncode": 0,
+  "plates": 1,
+  "hours": 3.7,
+  "grams": 145,
+  "plate_hours": [
+   3.7
+  ]
+ },
+ {
+  "job": "x2d_05_黑_头芯和关节",
+  "machine": "X2D",
+  "colour": "黑",
+  "process": "shell",
+  "pieces": 6,
+  "ok": true,
+  "returncode": 0,
+  "plates": 3,
+  "hours": 17.6,
+  "grams": 828,
+  "plate_hours": [
+   8.5,
+   4.9,
+   4.2
+  ]
+ },
+ {
+  "job": "x2d_06_紫_上臂腕环目线",
+  "machine": "X2D",
+  "colour": "紫",
+  "process": "shell",
+  "pieces": 5,
+  "ok": true,
+  "returncode": 0,
+  "plates": 1,
+  "hours": 7.3,
+  "grams": 276,
+  "plate_hours": [
+   7.3
+  ]
+ },
+ {
+  "job": "x2d_07_紫_光环",
+  "machine": "X2D",
+  "colour": "紫",
+  "process": "halo",
+  "pieces": 1,
+  "ok": true,
+  "returncode": 0,
+  "plates": 1,
+  "hours": 0.7,
+  "grams": 17,
+  "plate_hours": [
+   0.7
+  ]
+ },
+ {
+  "job": "a2l_01_白_躯干",
+  "machine": "A2L",
+  "colour": "白",
+  "process": "shell",
+  "pieces": 1,
+  "ok": true,
+  "returncode": 0,
+  "plates": 1,
+  "hours": 40.8,
+  "grams": 1879,
+  "plate_hours": [
+   40.8
+  ]
+ },
+ {
+  "job": "a2l_02_白_骨盆",
+  "machine": "A2L",
+  "colour": "白",
+  "process": "pelvis",
+  "pieces": 1,
+  "ok": true,
+  "returncode": 0,
+  "plates": 1,
+  "hours": 11.9,
+  "grams": 495,
+  "plate_hours": [
+   11.9
+  ]
+ },
+ {
+  "job": "a1_01_白_底座",
+  "machine": "A1",
+  "colour": "白",
+  "process": "flat",
+  "pieces": 4,
+  "ok": true,
+  "returncode": 0,
+  "plates": 4,
+  "hours": 23.3,
+  "grams": 1430,
+  "plate_hours": [
+   5.9,
+   5.9,
+   5.8,
+   5.8
+  ]
+ },
+ {
+  "job": "a1_02_白_腿",
+  "machine": "A1",
+  "colour": "白",
+  "process": "shell",
+  "pieces": 4,
+  "ok": true,
+  "returncode": 0,
+  "plates": 2,
+  "hours": 36.2,
+  "grams": 1544,
+  "plate_hours": [
+   18.1,
+   18.1
+  ]
+ },
+ {
+  "job": "a1_03_白_上身和头甲",
+  "machine": "A1",
+  "colour": "白",
+  "process": "shell",
+  "pieces": 13,
+  "ok": true,
+  "returncode": 0,
+  "plates": 5,
+  "hours": 45.4,
+  "grams": 1495,
+  "plate_hours": [
+   14.3,
+   11.3,
+   9.9,
+   5.6,
+   4.3
+  ]
+ }
+]
